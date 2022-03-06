@@ -1,0 +1,22 @@
+{
+    "name": "fooddeliveryapi",
+    "version": "1.0.0",
+    "description": "food delivery api using node js",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon server.js"
+    },
+    "author": "abishek kumar",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^5.0.1",
+        "dotenv": "^10.0.0",
+        "express": "^4.17.1",
+        "firebase-admin": "^10.0.2",
+        "jsonwebtoken": "^8.5.1",
+        "mysql": "^2.18.1",
+        "time-stamp": "^2.2.0",
+        "validator": "^13.7.0"
+    }
+}
