@@ -18,6 +18,11 @@ const {
     setComment,
 } = require("./../controllers/user/commentAndRating.controller");
 const { storeFcm } = require("./../controllers/user/fcm.controller");
+const {
+    getnewOrder,
+    getHistoryOrder,
+    getOrderDetail,
+} = require("./../controllers/user/orders.controller");
 const router = require("express").Router();
 
 router.get("/signup", signUp);
@@ -36,6 +41,9 @@ router.get("/address/show/:id", showAddress);
 router.post("/comment/set", setComment);
 router.get("/comment/get", getComment);
 router.post("/store/fcm", storeFcm);
+router.get("/orders/new/:user_id", getnewOrder);
+router.get("/orders/completed/:user_id", getHistoryOrder);
+router.get("/orders/detail/:order_id", getOrderDetail);
 // TO DO (validation)
 
 // TO CREATE
