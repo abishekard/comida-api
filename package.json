@@ -10,13 +10,16 @@
     "author": "abishek kumar",
     "license": "ISC",
     "dependencies": {
+        "@sendgrid/mail": "^7.6.2",
         "bcrypt": "^5.0.1",
         "dotenv": "^10.0.0",
         "express": "^4.17.1",
         "firebase-admin": "^10.0.2",
         "jsonwebtoken": "^8.5.1",
+        "multer": "^1.4.4",
         "mysql": "^2.18.1",
         "time-stamp": "^2.2.0",
+        "uuid": "^8.3.2",
         "validator": "^13.7.0"
     }
 }
