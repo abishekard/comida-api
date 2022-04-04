@@ -25,7 +25,7 @@ const {
 } = require("./../controllers/user/orders.controller");
 const router = require("express").Router();
 
-router.get("/signup", signUp);
+router.post("/signup", signUp);
 router.post("/login", logIn);
 //router.get("/profile/:id", checkToken, getUserProfile);
 router.get("/profile/:id", getUserProfile);

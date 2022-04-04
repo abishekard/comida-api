@@ -37,12 +37,9 @@ router.post("/product/change/stock", changeStock);
 router.post("/order/dispatch", dispatchOrder);
 router.post("/product/create", upload.single("image"), createProduct);
 router.post("/product/edit", editProduct);
-// TO CREATE
 
-// TO CREATE
-
-router.post("/patner/get/address");
-router.post("/patner/get/shop");
+router.post("/patner/set/address");
+router.post("/patner/set/shop");
 router.post("/patner/profile/show/:partner_id");
 
 // TO CREATE

@@ -17,7 +17,7 @@ app.use(express.json());
 
 app.use("/api/user", userRouter);
 app.use("/api/partner", partnerRouter);
-app.use("/api/delivery", userRouter);
+//app.use("/api/delivery", userRouter);
 
 app.post("/api/mail", (req, res) => {
     sendEmailService(
