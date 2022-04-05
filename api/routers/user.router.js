@@ -1,9 +1,13 @@
-const signUp = require("./../controllers/user/signup.controller");
+const {
+    signUp,
+    validateSignup,
+} = require("./../controllers/user/signup.controller");
 const logIn = require("./../controllers/user/login.controller");
 const getUserProfile = require("./../controllers/user/profile.controller");
 const placeOrder = require("./../controllers/user/placeOrder.controller");
 const { checkToken } = require("./../../auth/token_validation");
 const {
+    validateAddress,
     createAddress,
     deleteAddress,
     showAddress,
@@ -25,19 +29,22 @@ const {
 } = require("./../controllers/user/orders.controller");
 const router = require("express").Router();
 
-router.post("/signup", signUp);
+router.post("/signup", validateSignup(), signUp);
 router.post("/login", logIn);
 //router.get("/profile/:id", checkToken, getUserProfile);
 router.get("/profile/:id", getUserProfile);
 router.post("/placeOrder", placeOrder);
 
+//completed
 router.get("/all-restaurant", getAllRestaurant);
 router.get("/partner/info/:id", getPartnerinfo);
-
-// TO DO (validation)
-router.post("/address/create", createAddress);
+router.post("/address/create", validateAddress(), createAddress);
 router.post("/address/delete/:id", deleteAddress);
 router.get("/address/show/:id", showAddress);
+//completed
+
+// TO DO (validation)
+
 router.post("/comment/set", setComment);
 router.get("/comment/get", getComment);
 router.post("/store/fcm", storeFcm);
