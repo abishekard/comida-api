@@ -6,8 +6,8 @@ const { sendEmailService } = require("./api/services/sendEmail.service");
 const app = express();
 const multer = require("multer");
 const {
-    uploadImageService,
-    deleteImageService,
+    uploadFoodImageService,
+    deleteFoodImageService,
 } = require("./api/services/restaurant/firebaseUpload.service");
 var storage = multer.memoryStorage();
 var upload = multer({ storage });

@@ -65,7 +65,27 @@ module.exports = {
         });
     },
     queueOrder: (req, res) => {
-        queueOrderService(req.body.order_id, (error, result) => {
+        if (req.body.order_id == undefined)
+            res.status(400).send({
+                status: 400,
+                message: "order_id required",
+            });
+        else
+            queueOrderService(req.body.order_id, (error, result) => {
+                if (error)
+                    res.status(500).send({
+                        status: 500,
+                        message: error,
+                    });
+                else
+                    res.status(200).send({
+                        status: 200,
+                        data: "order queued",
+                    });
+            });
+    },
+    dispatchOrder: () => {
+        dispatchOrderService(req.body.order_id, (error, result) => {
             if (error)
                 res.status(500).send({
                     status: 500,
@@ -74,9 +94,8 @@ module.exports = {
             else
                 res.status(200).send({
                     status: 200,
-                    data: "order queued",
+                    data: "order dispatched",
                 });
         });
     },
-    dispatchOrder: () => {},
 };

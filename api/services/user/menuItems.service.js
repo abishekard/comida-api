@@ -77,4 +77,13 @@ module.exports = {
         };
         callback(null, response);
     },
+    getAllMenuItemService: (callback) => {
+        database.query(
+            "select * from product_table", [],
+            (error, result, field) => {
+                if (error) callback(error);
+                else callback(null, JSON.parse(JSON.stringify(result)));
+            }
+        );
+    },
 };

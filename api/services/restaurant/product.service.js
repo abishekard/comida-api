@@ -1,4 +1,5 @@
 const database = require("./../../../config/database");
+const timestamp = require("time-stamp");
 
 const getProductCategory = (partner_id) => {
     return new Promise((resolve, reject) => {
@@ -24,16 +25,27 @@ const getCategoryItem = (category, partner_id) => {
 };
 
 module.exports = {
-    createProductService: (data, callback) => {
-        /* 'item_name' => 'required',
-                    'item_image' => 'required|mimes:png,jpg',
-                    'item_price' => 'required',
-                    'veg_non_veg' => 'required',
-                    'category' => 'required',
-                    'price_type' => 'required',
-                    'discount' => 'required',
-                    'partner_id' => 'required'
-                     */
+    createProductService: (data, item_image, callback) => {
+        database.query(
+            "insert into product_table (item_name,item_image,price,veg_non_veg,category,price_type,discount,partner_id,in_stock,created_at) values(?,?,?,?,?,?,?,?,?,?)", [
+                data.item_name,
+                item_image,
+                data.item_price,
+                data.veg_non_veg,
+                data.category,
+                data.price_type,
+                data.discount,
+                data.partner_id,
+                1,
+                timestamp("YYYY-MM-DD HH:mm:ss"),
+            ],
+            (error, result, field) => {
+                if (error) {
+                    console.log(error);
+                    callback(error);
+                } else callback(null, result);
+            }
+        );
     },
     editProductService: () => {},
     deleteProductService: (product_id, callback) => {

@@ -2,7 +2,10 @@ const {
     signUp,
     validateSignup,
 } = require("./../controllers/user/signup.controller");
-const logIn = require("./../controllers/user/login.controller");
+const {
+    logIn,
+    validateLogin,
+} = require("./../controllers/user/login.controller");
 const getUserProfile = require("./../controllers/user/profile.controller");
 const {
     placeOrder,
@@ -19,6 +22,7 @@ const {
     getAllRestaurant,
     getProductCategoryWise,
     getPartnerinfo,
+    getAllMenuItem,
 } = require("./../controllers/user/restaurant-data.controller");
 const {
     getComment,
@@ -46,8 +50,9 @@ router.get("/orders/new/:user_id", getnewOrder);
 router.get("/orders/completed/:user_id", getHistoryOrder);
 router.get("/orders/detail/:order_id", getOrderDetail);
 router.post("/signup", validateSignup(), signUp);
-router.post("/login", logIn);
+router.post("/login", validateLogin(), logIn);
 router.get("/product/category/all/:partner_id", getProductCategoryWise);
+router.get("/product/all", getAllMenuItem);
 router.post("/placeOrder", validatePlaceOrder(), placeOrder);
 //completed
 
@@ -60,7 +65,11 @@ router.post("/store/fcm", storeFcm);
 // TO DO (validation)
 
 // TO CREATE
-
+router.post("/customer/login/send/otp");
+router.post("/customer/login/with/otp");
+router.post("/customer/edit/profie");
+router.post("/customer/send/email");
+router.post("/customer/send/notification");
 // TO CREATE
 
 module.exports = router;

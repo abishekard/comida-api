@@ -11,9 +11,9 @@ const admin = firebaseAdmin.initializeApp({
 
 const storageRef = admin.storage().bucket(`gs://comida-35ebc.appspot.com`);
 
-async function uploadFile(img_file, filename) {
+async function uploadFoodImage(img_file, filename) {
     return new Promise((resolve, reject) => {
-        const blob = storageRef.file("product_images/" + img_file.originalname);
+        const blob = storageRef.file("product_images/" + filename);
 
         const blobStream = blob.createWriteStream({
             metadata: {
@@ -34,13 +34,24 @@ async function uploadFile(img_file, filename) {
     });
 }
 
+const generateFileName = () => {
+    const name1 = "fd_";
+    const name2 = "_img_";
+    const rand1 = Math.floor(100 + Math.random() * 900);
+    const rand2 = Math.floor(100 + Math.random() * 900);
+    const rand3 = Math.floor(100 + Math.random() * 900);
+    const finalName = name1 + rand1 + "x" + rand2 + name2 + rand3;
+    return finalName;
+};
+
 module.exports = {
-    uploadImageService: async(file, callback) => {
-        const url = await uploadFile(file, "my-image.png");
+    uploadFoodImageService: async(file, callback) => {
+        const fileName = generateFileName() + ".jpg";
+        const url = await uploadFoodImage(file, fileName);
         console.log(url);
         callback(null, url);
     },
-    deleteImageService: (url, callback) => {
+    deleteFoodImageService: (url, callback) => {
         const current_url = new URL(url);
         // get access to URLSearchParams object
         const search_params = current_url.searchParams;

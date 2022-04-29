@@ -1,11 +1,11 @@
-const { loginService } = require("./../../services/user/login.service");
+const { loginService } = require("./../../services/restaurant/login.service");
 
 const { compareSync } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
 
 const validateLogin = () => {
-    return [check("email").notEmpty(), check("password").notEmpty()];
+    return [check("email").notEmpty().isEmail(), check("password").notEmpty()];
 };
 
 const logIn = (req, res) => {
@@ -16,14 +16,15 @@ const logIn = (req, res) => {
             message: validationError,
         });
     const body = req.body;
-    console.log(body);
-    loginService(body, (err, results) => {
+    console.log(body.password);
+    loginService(body, async(err, results) => {
         if (err) res.send(err);
         if (!results) {
             res.json({
                 success: 0,
                 message: "invalid email or password",
             });
+            return;
         }
 
         console.log(results[0]);
@@ -36,6 +37,7 @@ const logIn = (req, res) => {
                 success: 1,
                 message: "login successful",
                 token: jsontoken,
+                data: results[0],
             });
         } else {
             return res.json({

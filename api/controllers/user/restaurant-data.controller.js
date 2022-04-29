@@ -5,6 +5,7 @@ const {
 } = require("./../../services/user/restaurant-data.service");
 const {
     getMenuItemCategoryWiseService,
+    getAllMenuItemService,
 } = require("./../../services/user/menuItems.service");
 
 module.exports = {
@@ -25,6 +26,20 @@ module.exports = {
     getProductCategoryWise: (req, res) => {
         const partnerId = req.params.partner_id;
         getMenuItemCategoryWiseService(partnerId, (error, result) => {
+            if (error)
+                res.status(500).send({
+                    status: 500,
+                    message: "database error",
+                });
+            else
+                res.status(200).send({
+                    status: 200,
+                    data: result,
+                });
+        });
+    },
+    getAllMenuItem: (req, res) => {
+        getAllMenuItemService((error, result) => {
             if (error)
                 res.status(500).send({
                     status: 500,
