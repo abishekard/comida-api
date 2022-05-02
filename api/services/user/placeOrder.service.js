@@ -30,14 +30,18 @@ const insertOrderData = (req, addressData, orderId, otp) => {
         database.query(
             "insert into customer_order_table (user_id,customer_address_id,created_at,total_price,order_id,partner_id,address_type,delivered_address,lat_lng,status,week,month,year,date,otp,payment_method) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [
                 req.user_id,
-                req.address_id,
+                // req.address_id,
+                111,
                 timestamp("YYYY-MM-DD HH:mm:ss"),
                 req.total_price,
                 orderId,
                 req.partner_id,
-                addressData.address_type,
-                addressData.address,
-                addressData.latitude + " " + addressData.longitude,
+                // addressData.address_type,
+                "home",
+                //addressData.address,
+                req.address,
+                // addressData.latitude + " " + addressData.longitude,
+                "84.3 85.4",
                 1,
                 getCurrentWeekOfMonth(),
                 month("M"),
@@ -141,13 +145,13 @@ const placeOrder = async(data, callback) => {
     var pIdArray = data.product_id.split(",");
     var quantity = data.quantity.split(",");
     const orderId = data.order_id;
-    const addressId = data.address_id;
+    // const addressId = data.address_id;
     // get the user address data using address id
-    var addressData = await getAddressData(data.address_id);
+    // var addressData = await getAddressData(data.address_id);
     // generating otp
     const otp = Math.floor(1000 + Math.random() * 9000);
     // inserting order data to customer_order_table
-    const dataInserted = await insertOrderData(data, addressData, orderId, otp);
+    const dataInserted = await insertOrderData(data, "addressData", orderId, otp);
     // inserting order item data to order_item_table
     insertOrderItemMain(pIdArray, quantity, orderId);
     // getting user and restaurant data for sending notification
@@ -180,10 +184,10 @@ const placeOrder = async(data, callback) => {
         data.total_price;
 
     /*
-                $this->sendOrderNotification($title, $body, $fcmToken);
-                $this->sendConfirmationNotification($CusTitle, $CusBody, $CusFcmToken);
-                return response()->json(['status' => 200, 'orderId' => $orderId]);
-                */
+                            $this->sendOrderNotification($title, $body, $fcmToken);
+                            $this->sendConfirmationNotification($CusTitle, $CusBody, $CusFcmToken);
+                            return response()->json(['status' => 200, 'orderId' => $orderId]);
+                            */
 
     const response = {
         status: 200,

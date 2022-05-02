@@ -3,7 +3,7 @@ const { check, validationResult } = require("express-validator");
 const validatePlaceOrder = () => {
     return [
         check("user_id").notEmpty(),
-        check("address_id").notEmpty(),
+        check("address").notEmpty(),
         check("product_id").notEmpty(),
         check("quantity").notEmpty(),
         check("total_price").notEmpty(),
