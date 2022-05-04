@@ -3,6 +3,7 @@ const pool = require("./config/database");
 const userRouter = require("./api/routers/user.router");
 const partnerRouter = require("./api/routers/partner.router");
 const { sendEmailService } = require("./api/services/sendEmail.service");
+const cors = require("cors");
 const app = express();
 const multer = require("multer");
 const {
@@ -12,6 +13,7 @@ const {
 var storage = multer.memoryStorage();
 var upload = multer({ storage });
 
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
