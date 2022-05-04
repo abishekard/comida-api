@@ -10,11 +10,13 @@ const validateLogin = () => {
 
 const logIn = (req, res) => {
     const validationError = validationResult(req);
-    if (!validationError.isEmpty())
+    if (!validationError.isEmpty()) {
         res.status(400).send({
             status: 400,
             message: validationError,
         });
+        return;
+    }
     const body = req.body;
     console.log(body.password);
     loginService(body, async(err, results) => {
