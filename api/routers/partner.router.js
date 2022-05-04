@@ -55,6 +55,7 @@ router.get("/product/show", showProduct);
 router.get("/product/detail/show", showProductDetail);
 router.post("/product/delete/:product_id", deleteProduct);
 router.post("/product/change/stock", changeStock);
+router.post("/order/dispatch", dispatchOrder);
 // completed
 
 // TO VALIDATE
@@ -62,7 +63,6 @@ router.post("/product/change/stock", changeStock);
 // TO VALIDATE
 
 // TO CREATE
-router.post("/order/dispatch", dispatchOrder);
 
 router.post("/product/edit", editProduct);
 

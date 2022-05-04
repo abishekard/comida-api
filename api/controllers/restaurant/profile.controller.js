@@ -4,8 +4,9 @@ const {
 
 const getProfileData = (req, res) => {
     const partner_id = req.params.partner_id;
-
+    console.log("par id - " + partner_id);
     getProfileDataService(partner_id, (error, result) => {
+        console.log("par id - " + partner_id);
         if (error)
             res.status(400).send({
                 status: 400,

@@ -10,20 +10,26 @@ const validateLogin = () => {
 
 const logIn = (req, res) => {
     const validationError = validationResult(req);
-    if (!validationError.isEmpty())
+    if (!validationError.isEmpty()) {
         res.status(400).send({
             status: 400,
             message: validationError,
         });
+        return;
+    }
     const body = req.body;
     console.log(body);
     loginService(body, (err, results) => {
-        if (err) res.send(err);
-        if (!results) {
-            res.json({
+        if (err) {
+            res.send(err);
+            return;
+        }
+        if (!results[0]) {
+            res.status(400).send({
                 success: 0,
                 message: "invalid email or password",
             });
+            return;
         }
 
         console.log(results[0]);

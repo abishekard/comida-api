@@ -9,6 +9,7 @@ const validateLogin = () => {
 };
 
 const logIn = (req, res) => {
+    console.log(req.body);
     const validationError = validationResult(req);
     if (!validationError.isEmpty()) {
         res.status(400).send({
@@ -20,9 +21,12 @@ const logIn = (req, res) => {
     const body = req.body;
     console.log(body.password);
     loginService(body, async(err, results) => {
-        if (err) res.send(err);
-        if (!results) {
-            res.json({
+        if (err) {
+            res.send(err);
+            return;
+        }
+        if (!results[0]) {
+            res.status(400).send({
                 success: 0,
                 message: "invalid email or password",
             });
