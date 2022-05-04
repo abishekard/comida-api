@@ -8,7 +8,7 @@ module.exports = {
                 if (err) {
                     return callback(err);
                 } else {
-                    return callback(null, results);
+                    return callback(null, JSON.parse(JSON.stringify(results)));
                 }
             }
         );
