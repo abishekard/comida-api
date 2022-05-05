@@ -92,6 +92,7 @@ module.exports = {
             customer_name: userData.name,
             customer_mobile: userData.mobile,
             delivered_address: orderDeatail.delivered_address,
+            total_price: orderDeatail.total_price,
             created_at: orderDeatail.created_at,
             data: orderItems,
         };
