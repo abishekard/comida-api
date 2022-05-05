@@ -53,7 +53,7 @@ router.post(
     createProduct
 );
 router.get("/product/show", showProduct);
-router.get("/product/show/all", showAllProduct);
+router.post("/product/show/all", showAllProduct);
 router.get("/product/detail/show", showProductDetail);
 router.post("/product/delete/:product_id", deleteProduct);
 router.post("/product/change/stock", changeStock);
