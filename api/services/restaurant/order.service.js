@@ -11,6 +11,17 @@ const getOrderDetail = (order_id) => {
         );
     });
 };
+const getUserData = (user_id) => {
+    return new Promise((resolve, reject) => {
+        database.query(
+            `select * from users where id = ? `, [user_id],
+            (error, result, field) => {
+                if (error) console.log(error);
+                else resolve(result[0]);
+            }
+        );
+    });
+};
 const getOrderItem = (order_id) => {
     return new Promise((resolve, reject) => {
         database.query(
@@ -72,9 +83,14 @@ module.exports = {
     getOrderDetailService: async(order_id, callback) => {
         const orderDeatail = await getOrderDetail(order_id);
         const orderItems = await getOrderItem(order_id);
+        const userData = await getUserData(orderDeatail.user_id);
+        console.log(orderDeatail.user_id);
+        console.log(userData);
         const response = {
             status: 200,
             customer_id: orderDeatail.user_id,
+            customer_name: userData.name,
+            customer_mobile: userData.mobile,
             delivered_address: orderDeatail.delivered_address,
             created_at: orderDeatail.created_at,
             data: orderItems,
