@@ -2,6 +2,7 @@ const {
     createProductService,
     editProductService,
     showProductService,
+    showAllProductService,
     showProductDetailService,
     deleteProductService,
     changeStockService,
@@ -68,6 +69,29 @@ module.exports = {
         const partner_id = req.body.partner_id;
 
         showProductService(partner_id, (error, result) => {
+            if (error)
+                res.status(500).send({
+                    status: 500,
+                    message: error,
+                });
+            else
+                res.status(200).send({
+                    status: 200,
+                    data: result,
+                });
+        });
+    },
+    showAllProduct: (req, res) => {
+        if (req.body.partner_id == undefined) {
+            res.status(400).send({
+                status: 200,
+                message: "partner_id required",
+            });
+            return;
+        }
+        const partner_id = req.body.partner_id;
+
+        showAllProductService(partner_id, (error, result) => {
             if (error)
                 res.status(500).send({
                     status: 500,

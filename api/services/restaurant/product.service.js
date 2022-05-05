@@ -23,6 +23,17 @@ const getCategoryItem = (category, partner_id) => {
         );
     });
 };
+const getAllCategoryItem = (partner_id) => {
+    return new Promise((resolve, reject) => {
+        database.query(
+            `select * from product_table where partner_id=?`, [partner_id],
+            (error, result, field) => {
+                if (error) console.log(error);
+                else resolve(result);
+            }
+        );
+    });
+};
 
 module.exports = {
     createProductService: (data, item_image, callback) => {
@@ -77,6 +88,10 @@ module.exports = {
             }
         }
 
+        callback(null, response);
+    },
+    showAllProductService: async(partner_id, callback) => {
+        const response = await getAllCategoryItem(partner_id);
         callback(null, response);
     },
     showProductDetailService: (product_id, callback) => {
