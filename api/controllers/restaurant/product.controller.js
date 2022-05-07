@@ -17,10 +17,10 @@ const validatProduct = () => {
         check("item_name").notEmpty(),
         check("item_price").notEmpty(),
         check("veg_non_veg").notEmpty(),
-        check("category").notEmpty(),
-        check("price_type").notEmpty(),
-        check("discount").notEmpty(),
-        check("partner_id").notEmpty(),
+        //  check("category").notEmpty(),
+        //  check("price_type").notEmpty(),
+        //  check("discount").notEmpty(),
+        //  check("partner_id").notEmpty(),
     ];
 };
 module.exports = {
