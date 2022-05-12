@@ -27,6 +27,7 @@ module.exports = {
     createProduct: (req, res) => {
         const validationError = validationResult(req);
         if (!validationError.isEmpty()) {
+            console.log(validationError);
             res.status(400).send({
                 status: 400,
                 message: validationError,

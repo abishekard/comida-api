@@ -42,6 +42,7 @@ const logIn = (req, res) => {
                 success: 1,
                 message: "login successful",
                 token: jsontoken,
+                data: results[0],
             });
         } else {
             return res.json({
