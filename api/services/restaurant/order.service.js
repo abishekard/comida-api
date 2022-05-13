@@ -111,7 +111,7 @@ module.exports = {
     dispatchOrderService: (order_id, callback) => {
         // TO DO (incomplete)
         database.query(
-            `update customer_order_table set status=3 where order_id=?`, [order_id],
+            `update customer_order_table set status=4 where order_id=?`, [order_id],
             (error, result, field) => {
                 if (error) callback(error);
                 else
