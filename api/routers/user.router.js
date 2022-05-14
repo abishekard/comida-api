@@ -6,7 +6,10 @@ const {
     logIn,
     validateLogin,
 } = require("./../controllers/user/login.controller");
-const getUserProfile = require("./../controllers/user/profile.controller");
+const {
+    getUserProfile,
+    UpdateProfileImage,
+} = require("./../controllers/user/profile.controller");
 const {
     placeOrder,
     validatePlaceOrder,
@@ -36,6 +39,10 @@ const {
 } = require("./../controllers/user/orders.controller");
 const router = require("express").Router();
 
+const multer = require("multer");
+var storage = multer.memoryStorage();
+var upload = multer({ storage });
+
 //router.get("/profile/:id", checkToken, getUserProfile);
 
 //completed
@@ -54,6 +61,11 @@ router.post("/login", validateLogin(), logIn);
 router.get("/product/category/all/:partner_id", getProductCategoryWise);
 router.get("/product/all", getAllMenuItem);
 router.post("/placeOrder", validatePlaceOrder(), placeOrder);
+router.post(
+    "/edit/profile_image/:user_id",
+    upload.single("image"),
+    UpdateProfileImage
+);
 //completed
 
 // TO DO (validation)
@@ -67,7 +79,7 @@ router.post("/store/fcm", storeFcm);
 // TO CREATE
 router.post("/customer/login/send/otp");
 router.post("/customer/login/with/otp");
-router.post("/customer/edit/profie");
+
 router.post("/customer/send/email");
 router.post("/customer/send/notification");
 // TO CREATE

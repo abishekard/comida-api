@@ -1,7 +1,7 @@
 const pool = require("./../../../config/database");
 const timestamp = require("time-stamp");
 
-const getProfile = (id, callback) => {
+const getProfileService = (id, callback) => {
     console.log(timestamp("DD/MM/YYYY HH:mm:ss"));
     pool.query(
         `select * from users where id = ?`, [id],
@@ -12,4 +12,14 @@ const getProfile = (id, callback) => {
     );
 };
 
-module.exports = getProfile;
+const updateProfileUrlService = (user_id, profile_image, callback) => {
+    pool.query(
+        `update users set profile_image=? where id=?`, [profile_image, user_id],
+        (err, result, fields) => {
+            if (err) callback(err);
+            else callback(null, "profile image updated");
+        }
+    );
+};
+
+module.exports = { getProfileService, updateProfileUrlService };

@@ -25,7 +25,30 @@ async function uploadFoodImage(img_file, filename) {
         // If all is good and done
         blobStream.on("finish", () => {
             // Assemble the file public URL
-            const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${storageRef.name}/o/product_images%2F${img_file.originalname}?alt=media&file_name=${img_file.originalname}`;
+            const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${storageRef.name}/o/product_images%2F${filename}?alt=media&file_name=${img_file.originalname}`;
+            console.log(publicUrl);
+            resolve(publicUrl);
+        });
+
+        blobStream.end(img_file.buffer);
+    });
+}
+
+async function uploadUserProfileImage(img_file, filename) {
+    return new Promise((resolve, reject) => {
+        const blob = storageRef.file("user_profile_images/" + filename);
+
+        const blobStream = blob.createWriteStream({
+            metadata: {
+                contentType: img_file.mimetype,
+            },
+        });
+
+        blobStream.on("error", (err) => console.log(err));
+        // If all is good and done
+        blobStream.on("finish", () => {
+            // Assemble the file public URL
+            const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${storageRef.name}/o/user_profile_images%2F${filename}?alt=media&file_name=${img_file.originalname}`;
             console.log(publicUrl);
             resolve(publicUrl);
         });
@@ -48,6 +71,12 @@ module.exports = {
     uploadFoodImageService: async(file, callback) => {
         const fileName = generateFileName() + ".jpg";
         const url = await uploadFoodImage(file, fileName);
+        console.log(url);
+        callback(null, url);
+    },
+    uploadUserProfileImageService: async(file, callback) => {
+        const fileName = generateFileName() + ".jpg";
+        const url = await uploadUserProfileImage(file, fileName);
         console.log(url);
         callback(null, url);
     },
