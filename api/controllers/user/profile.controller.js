@@ -9,7 +9,7 @@ const {
 const getUserProfile = (req, res) => {
     const userId = req.params.id;
     console.log("....userid...." + userId);
-    getProfieService(userId, (err, results) => {
+    getProfileService(userId, (err, results) => {
         if (err) {
             res.json({
                 success: 0,
