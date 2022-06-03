@@ -36,6 +36,10 @@ const {
     setAddress,
     validateAddress,
 } = require("./../controllers/restaurant/address.controller");
+const {
+    ValidateMonthlyDataInput,
+    getMonthlyData,
+} = require("../controllers/restaurant/statistics.controller");
 // completed
 router.post("/signUp", validateSignup(), signUp);
 router.post("/login", validateLogin(), logIn);
@@ -58,6 +62,7 @@ router.get("/product/detail/show", showProductDetail);
 router.post("/product/delete/:product_id", deleteProduct);
 router.post("/product/change/stock", changeStock);
 router.post("/order/dispatch", dispatchOrder);
+router.post("/statistics", ValidateMonthlyDataInput(), getMonthlyData);
 // completed
 
 // TO VALIDATE
