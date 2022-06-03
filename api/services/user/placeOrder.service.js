@@ -44,7 +44,7 @@ const insertOrderData = (req, addressData, orderId, otp) => {
                 "84.3 85.4",
                 1,
                 getCurrentWeekOfMonth(),
-                month("M"),
+                month("M") + 1,
                 year("yyyy"),
                 timestamp("YYYY-MM-DD HH:mm:ss"),
                 otp,
@@ -184,10 +184,10 @@ const placeOrder = async(data, callback) => {
         data.total_price;
 
     /*
-                            $this->sendOrderNotification($title, $body, $fcmToken);
-                            $this->sendConfirmationNotification($CusTitle, $CusBody, $CusFcmToken);
-                            return response()->json(['status' => 200, 'orderId' => $orderId]);
-                            */
+                              $this->sendOrderNotification($title, $body, $fcmToken);
+                              $this->sendConfirmationNotification($CusTitle, $CusBody, $CusFcmToken);
+                              return response()->json(['status' => 200, 'orderId' => $orderId]);
+                              */
 
     const response = {
         status: 200,
